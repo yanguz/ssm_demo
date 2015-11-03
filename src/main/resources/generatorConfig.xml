@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动 -->
+	<classPathEntry location="src/main/resources/db2/db2jcc.jar" />
+	
+	<!-- 上下文环境配置 -->
+	<context id="db2Tables" defaultModelType="flat" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /> <!--是否取消注释 -->
+			<property name="suppressDate" value="true" /> <!--是否生成注释代时间戳 -->
+		</commentGenerator>
+
+
+		<!--数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="com.ibm.db2.jcc.DB2Driver"
+			connectionURL="jdbc:db2://99.12.113.74:50000/DBEXT" userId="extuser"
+			password="extuser" />
+
+		<!-- 类型转换 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成实体类地址 -->
+		<javaModelGenerator targetPackage="com.demo.model"
+			targetProject="src\main\java">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="false" />
+			<!-- 设置基类 -->
+			<property name="rootClass" value="com.demo.DataEntity"/>
+		</javaModelGenerator>
+
+		<!-- 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="mappers"
+			targetProject="src\main\resources">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<!-- 生成mapxml对应client，也就是接口dao -->
+		<javaClientGenerator targetPackage="com.demo.dao"
+			targetProject="src\main\java" type="XMLMAPPER">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+
+
+		<!-- 要生成哪些表 -->
+
+		<table schema="BIP_RPT" tableName="REPORT" domainObjectName="Report"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="BIP_RPT" tableName="MSTR_REPORT"
+			domainObjectName="MstrReport" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+
+	</context>
+</generatorConfiguration>
